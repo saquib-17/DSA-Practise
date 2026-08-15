@@ -1,0 +1,32 @@
+# Two Sum
+
+LeetCode Problem: Two Sum
+Difficulty: Easy
+
+## Approach
+Used a HashMap to store each number and its index.
+For every element, check whether its complement (target - current element)
+already exists in the HashMap.
+
+If found, return the indices of the complement and current element.
+
+## Complexity
+Time Complexity: O(n)
+Space Complexity: O(n)
+
+SOLUTION :
+class Solution {
+    public int[] twoSum(int[] nums, int target) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            int complement = target - nums[i];
+            if (map.containsKey(complement)) {
+                return new int[] { map.get(complement), i };
+            } else {
+                map.put(nums[i], i);
+            }
+        }
+        return new int[] {};
+    }
+}
+
