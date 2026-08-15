@@ -1,0 +1,53 @@
+# Valid Parentheses
+
+LeetCode Problem: Valid Parentheses
+Difficulty: Easy
+
+## Approach
+
+Used a Stack (Deque) to keep track of opening brackets.
+
+- If the character is an opening bracket, push it into the stack.
+- If the character is a closing bracket:
+  - If the stack is empty, the parentheses are invalid.
+  - Otherwise, check whether the top opening bracket matches the closing bracket.
+  - If it matches, pop the opening bracket.
+  - If it doesn't match, return false.
+- At the end, the stack must be empty for the parentheses to be valid.
+
+## Complexity
+
+Time Complexity: O(n)
+Space Complexity: O(n)
+
+SOLUTION :
+import java.util.ArrayDeque;
+import java.util.Deque;
+
+class Solution {
+    public boolean isValid(String s) {
+        Deque<Character> dq = new ArrayDeque<>();
+
+        for (int i = 0; i < s.length(); i++) {
+
+            if (s.charAt(i) == '[' || s.charAt(i) == '{' || s.charAt(i) == '(') {
+                dq.push(s.charAt(i));
+            } else {
+                if (dq.isEmpty()) {
+                    return false;
+                }
+
+                if ((dq.peek() == '(' && s.charAt(i) == ')') ||
+                    (dq.peek() == '[' && s.charAt(i) == ']') ||
+                    (dq.peek() == '{' && s.charAt(i) == '}')) {
+
+                    dq.pop();
+                } else {
+                    return false;
+                }
+            }
+        }
+
+        return dq.isEmpty();
+    }
+}
