@@ -1,0 +1,27 @@
+## Selection Sort
+
+### Approach
+- Divide the array into sorted and unsorted parts.
+- For every index `i`, find the smallest element in the unsorted portion.
+- Swap that smallest element with the element at index `i`.
+- Repeat until the entire array is sorted.
+
+### Complexity
+- Time Complexity: O(n²)
+- Space Complexity: O(1)
+
+SOLUTION :
+static int[] SelectionSort(int[] arr, int n) {
+        for (int i = 0; i <= n - 1; i++) {
+            int min = i;
+            for (int j = i; j <= n - 1; j++) {
+                if (arr[j] < arr[min]) {
+                    min = j;
+                }
+            }
+            int temp = arr[min];
+            arr[min] = arr[i];
+            arr[i] = temp;
+        }
+        return arr;
+    }
