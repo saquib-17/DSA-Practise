@@ -1,0 +1,37 @@
+## LeetCode 1480 — Running Sum of 1d Array
+
+## Problem : 
+Given an array, return the running sum of the array.
+The running sum at index i is the sum of all elements from index 0 to i.
+ex : input = [1, 2, 3, 4] , output = [1, 3, 6, 10]
+
+## Approach :
+- Initialize a variable runSum = 0 to keep track of the cumulative sum.
+- Traverse the array using a for loop from index 0 to the end.
+- Add the current element nums[i] to runSum.
+- Store the updated runSum back into nums[i].
+- Return the modified array after the loop
+
+## Complexity :
+Time Complexity = O(n) , traverse full Array
+Space Complexity = O(1), no extra array created , modified the array itself with cumulative sum
+
+SOLUTION : 
+class Solution {
+
+  // runningSum function 
+    public int[] runningSum(int[] nums) {
+        int runSum = 0;
+        for (int i = 0; i < nums.length; i++) {
+            runSum += nums[i];
+            nums[i] = runSum;
+        }
+        return nums;
+    }
+
+  // main function
+    static void main(String args[]) {
+      int[] nums = {1, 2, 3, 4};
+      System.out.println(Arrays.toString(runningSum(nums[])));    
+  }
+}
