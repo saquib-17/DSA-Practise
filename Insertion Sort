@@ -1,0 +1,30 @@
+# Insertion Sort
+
+## Approach
+- Take an element from the unsorted part.
+- Compare it with elements in the sorted part.
+- Move larger elements one position ahead.
+- Insert the element into its correct position.
+
+## Complexity
+Time:
+- Best: O(n)
+- Average: O(n²)
+- Worst: O(n²)
+
+Space:
+- O(1)
+
+SOLUTION :
+static int[] InsertionSort(int[] arr, int n) {
+        for (int i = 0; i < n; i++) {
+            int j =i;
+            while (j>0 && arr[j-1] > arr[j]) {
+                int temp = arr[j-1];
+                arr[j-1] = arr[j];
+                arr[j] = temp;
+                j--;
+            }
+        }
+        return arr;
+    }
