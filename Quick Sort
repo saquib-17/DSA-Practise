@@ -1,0 +1,48 @@
+## Quick Sort
+
+## Approach
+--  Choose the first element as the pivot.
+--  Take two pointers i and j, where i starts from low and j starts from high.
+--  Move i from left to right until we find an element greater than the pivot.
+--  Move j from right to left until we find an element smaller than or equal to the pivot.
+--  If i < j, swap the elements at i and j.
+--  Continue this process until i and j cross.
+--  Then swap the pivot with the element at j. Now the pivot is at its correct position.
+--  After that, recursively apply Quick Sort to the left and right parts of the pivot.
+--  This process continues until the whole array is sorted.
+
+## Time Complexity 
+Best Case: O(n log n)
+Average Case: O(n log n)
+Worst Case: O(n²)
+Space Complexity: O(log n) average, O(n) worst case due to recursion.
+
+SOLUTION :
+static void quickSort(int[] arr, int low, int high) {
+        if (low < high) {
+            int partitionIndex = partition(arr, low, high);
+            quickSort(arr, low, partitionIndex-1);
+            quickSort(arr, partitionIndex + 1, high);
+        }
+    }
+    static int partition(int[] arr, int low, int high) {
+        int pivot = arr[low];
+        int i = low , j = high;
+        while (i < j) {
+            while (arr[i] <= pivot && i <= high -1) {
+                i++;
+            }
+            while (arr[j] > pivot && j >= low +1) {
+                j--;
+            }
+            if (i < j) {
+                int temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+            }
+        }
+        int temp = arr[low];
+        arr[low] = arr[j];
+        arr[j] = temp;
+        return j;
+    }
