@@ -1,0 +1,42 @@
+## Richest Customer Wealth
+
+## Problem
+Given a 2D array accounts, where each row represents a customer and each element represents the money that customer has in a particular bank, find the maximum wealth among all customers.
+
+## Approach
+-- Treat each row as one customer.
+-- Use an outer loop i to traverse each customer.
+-- For every customer, initialize currentWealth = 0.
+-- Use an inner loop j to traverse all the banks of the current customer.
+-- Add each bank's wealth to currentWealth.
+-- After calculating the total wealth of the current customer, compare it with highestWealth.
+-- If currentWealth is greater, update highestWealth.
+-- Repeat this for all customers.
+-- Return highestWealth.
+
+## Complexity
+Time Complexity: O(m × n)
+If it's an n × n matrix → O(n²)
+
+Space Complexity: O(1)
+
+SOLUTION
+class Solution {
+    public int maximumWealth(int[][] accounts) {
+        int highestWealth = 0;
+
+        for (int i = 0; i < accounts.length; i++) {
+            int currentWealth = 0;
+
+            for (int j = 0; j < accounts[i].length; j++) {
+                currentWealth += accounts[i][j];
+            }
+
+            if (currentWealth > highestWealth) {
+                highestWealth = currentWealth;
+            }
+        }
+
+        return highestWealth;
+    }
+}
