@@ -1,0 +1,57 @@
+## Merge Sort
+
+## Approach
+-- Divide the array into two halves using mid.
+-- Recursively divide each half until it contains only one element.
+-- Merge the two sorted halves by comparing their elements.
+-- Use a temporary array to store the sorted elements during merging.
+-- Copy the elements from the temporary array back into the original array from low to high.
+-- Since the array is divided into halves, there are log n levels, and at every level all n elements are processed during merging.
+
+## Complexity
+Time Complexity: O(n log n) — Best, Average, Worst
+Space Complexity: O(n) — Temporary array used for merging.
+
+SOLUTION :
+// Recursion function to Divide the array into halfs till no one element able to divide
+static void mergeSort(int[] arr, int low, int high) {
+        if (low >= high) {
+            return;
+        }
+        int mid = (low+high) /2;
+        mergeSort(arr, low, mid);
+        mergeSort(arr, mid+1, high);
+        merge(arr, low, mid, high);
+    }
+
+// Recursion function to merge the elements with sorted order
+    static void merge(int[] arr, int low, int mid, int high) {
+        int left = low;
+        int right = mid+1;
+        int index = 0;
+        int[] temp = new int[high - low + 1];
+        while (left <= mid && right <= high) {
+            if (arr[left] <= arr[right]) {
+                temp[index] = arr[left];
+                left++;
+                index++;
+            } else {
+                temp[index] = arr[right];
+                right++;
+                index++;
+            }
+        }
+        while (left <= mid) {
+            temp[index] = arr[left];
+            left++;
+            index++;
+        }
+        while (right <= high) {
+            temp[index] = arr[right];
+            right++;
+            index++;
+        }
+        for (int i = 0; i < temp.length; i++) {
+            arr[low + i] = temp[index];
+        }
+    }
