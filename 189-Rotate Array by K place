@@ -1,0 +1,49 @@
+## 189 - Rotate Array by K places
+
+## Approach
+1. First I find k % n because if k is greater than the array length,
+   we only need the remaining rotations.
+2. I reverse the complete array.
+3. Then I reverse the first k elements to put the last k elements
+   in their correct order.
+4. Finally, I reverse the remaining elements to put them in their
+   correct order.
+
+Example:
+[1,2,3,4,5,6,7], k = 3
+
+Reverse whole array:
+[7,6,5,4,3,2,1]
+
+Reverse first k elements:
+[5,6,7,4,3,2,1]
+
+Reverse remaining elements:
+[5,6,7,1,2,3,4]
+
+So the array is rotated to the right by k positions.
+
+Time Complexity: O(n)
+Space Complexity: O(1)
+
+SOLUTION : 
+class Solution {
+    public void rotate(int[] nums, int k) {
+        int n = nums.length;
+        k = k % n;
+        arrayRotate(nums, 0, n - 1);
+        arrayRotate(nums, 0, k - 1);
+        arrayRotate(nums, k, n - 1);
+    }
+
+    public void arrayRotate(int[] arr, int start, int end) {
+        while (start < end) {
+            int temp = arr[start];
+            arr[start] = arr[end];
+            arr[end] = temp;
+            start++;
+            end--;
+        }
+    }
+
+}
