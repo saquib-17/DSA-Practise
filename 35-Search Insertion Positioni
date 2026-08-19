@@ -1,0 +1,37 @@
+# LeetCode 35 - Search Insert Position
+
+## Approach
+
+- The array is sorted, so I use Binary Search.
+- Initialize `left = 0` and `right = nums.length - 1`.
+- Calculate `mid` using `left + (right - left) / 2`.
+- If `nums[mid] < target`, search the right half.
+- If `nums[mid] > target`, `mid` can be the insertion position, so store it in `index` and search the left half for a smaller valid position.
+- If `nums[mid] == target`, return `mid`.
+- Initialize `index` as `nums.length` because the target may need to be inserted after the last element.
+- Return `index` if the target is not found.
+
+## Complexity
+
+- Time: O(log n)
+- Space: O(1)
+
+SOLUTION :
+class Solution {
+    public int searchInsert(int[] nums, int target) {
+        int left = 0, right = nums.length - 1;
+        int index = nums.length;
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            if (nums[mid] < target) {
+                left = mid + 1;
+            } else if (nums[mid] > target) {
+                index = mid;
+                right = mid - 1;
+            } else {
+                return mid;
+            }
+        }
+        return index;
+    }
+}
