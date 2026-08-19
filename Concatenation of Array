@@ -1,0 +1,25 @@
+## Concatenation of Array
+
+## Appraoch
+--  Find the length n of the given array.
+--  Create a new array ans of size 2 * n.
+--  Loop through the original array from 0 to n - 1.
+--  Put nums[i] in ans[i].
+--  Put the same nums[i] in ans[i + n].
+--  Return ans.
+
+Time Complexity : O(n)
+Space Complexity : O(n)
+
+SOLUTION : 
+class Solution {
+    public int[] getConcatenation(int[] nums) {
+        int n = nums.length;
+        int[] ans = new int[2 * n];
+        for (int i = 0; i < n ; i++) {
+            ans[i] = nums[i];
+            ans[i + n] = nums[i];
+        }
+        return ans;
+    }
+}
