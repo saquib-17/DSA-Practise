@@ -1,0 +1,71 @@
+## 724. Find Pivot Index
+
+## Approach 1 — Brute Force
+-- Take two variables, "leftSum" and "rightSum".
+-- Use an outer loop to consider every index as a possible pivot.
+-- Use an inner loop to traverse the array.
+-- If j < i, add nums[j] to leftSum.
+-- If j > i, add nums[j] to rightSum.
+-- After the inner loop, compare leftSum and rightSum.
+-- If both are equal, return the current index.
+-- If no pivot index is found, return -1.
+
+-- Time Complexity: O(n²)
+-- Space Complexity: O(1)
+
+SOLUTION : 
+class Solution {
+    public int pivotIndex(int[] nums) {
+        int n = nums.length;
+        for (int i = 0; i < n; i++) {
+            int leftSum = 0;
+            int rightSum = 0;
+            for (int j = 0; j < n; j++) {
+                if (j < i) {
+                    leftSum += nums[j];
+                }
+                if (j > i) {
+                    rightSum += nums[j];
+                }
+            }
+            if (leftSum == rightSum) {
+                return i;
+            }
+        }
+        return -1;
+    }
+}
+
+----------------------------------------
+## Approach 2 — Prefix Sum
+-- First calculate the total sum of all elements in the array.
+-- Take a variable "leftSum" and initialize it to 0.
+-- Traverse the array from left to right.
+-- Calculate rightSum using:
+   rightSum = totalSum - leftSum - nums[i]
+-- If leftSum == rightSum, return the current index.
+-- After checking the current index, add nums[i] to leftSum.
+-- If no pivot index is found, return -1.
+
+-- Time Complexity: O(n)
+-- Space Complexity: O(1)
+
+SOLUTION :
+public int pivotIndex(int[] nums) {
+        int n = nums.length;
+        int totalSum = 0;
+        int leftSum = 0;
+        // to calculate total sum
+        for (int i = 0; i < n; i++) {
+            totalSum += nums[i];
+        }
+
+        // leftSum and rightSum
+        for (int i = 0; i < n; i++) {
+            int rightSum = totalSum - leftSum - nums[i];
+            if (leftSum == rightSum)
+                return i;
+            leftSum += nums[i];
+        }
+        return -1;
+    }
