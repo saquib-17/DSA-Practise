@@ -1,0 +1,28 @@
+## 485-Max Consecutive Ones Problem
+
+## Approach
+--  Take 2 variables: current for tracking the current consecutive 1s and max for storing the maximum streak.
+--  Traverse the array from i = 0 to n - 1.
+--  If nums[i] == 1, increment current.
+--  If nums[i] != 1, reset current = 0.
+--  After each iteration, use Math.max() to compare current and max and store the larger value in max.
+--  After traversing the entire array, return max.
+
+## Time Complexity : O(n).
+## Space Complexity : O(1)
+
+SOLUTIION :
+public int findMaxConsecutiveOnes(int[] nums) {
+    int n = nums.length;
+    int current = 0;
+    int max = 0;
+    for (int i = 0; i < n; i++) {
+        if (nums[i] == 1) {
+            current++;
+        } else {
+            current = 0;
+        }
+        max = Math.max(max, current);
+    }
+    return max;
+}
