@@ -1,0 +1,31 @@
+## 121. Best Time to Buy and Sell Stock
+
+## Approach
+- Keep track of the minimum price seen so far.
+- For every price, consider it as the selling price.
+- Calculate the current profit using:
+  current price - minimum price
+- Keep track of the maximum profit found so far.
+- If the current price is smaller than the minimum price, update the minimum.
+- Finally, return the maximum profit.
+
+## Complexity
+- Time: O(n)
+- Space: O(1)
+
+SOLUTION :
+class Solution {
+    public int maxProfit(int[] prices) {
+        int n = prices.length;
+        int min = Integer.MAX_VALUE;
+        int maxP = 0;
+        for (int i = 0; i < n; i++) {
+            if (prices[i] < min)
+                min = prices[i];
+            int currentP = prices[i] - min;
+            if (currentP > maxP)
+                maxP = currentP;
+        }
+        return maxP;
+    }
+}
