@@ -1,0 +1,27 @@
+## 1470. Shuffle the Array
+
+## Approach
+- The array contains two halves: first half has x values and second half has y values.
+- For every index i:
+  - Take x from nums[i].
+  - Take y from nums[n + i].
+- Put x at position 2 * i in the new array.
+- Put y at position 2 * i + 1.
+- Continue until all n pairs are added.
+
+## Complexity
+
+- Time: O(n)
+- Space: O(n), because it uses an extra array.
+
+SOLUTION:
+class Solution {
+    public int[] shuffle(int[] nums, int n) {
+        int[] newArr = new int[2 * n];
+        for (int i = 0; i < n; i++) {
+            newArr[2 * i] = nums[i];
+            newArr[2 * i + 1] = nums[n + i];
+        }
+        return newArr;
+    }
+}
