@@ -1,0 +1,50 @@
+## 680. Valid Palindrome II
+
+## Approach: Two Pointers
+
+I used the same two pointer approach as Valid Palindrome.
+
+--  Start left from 0 and right from length - 1.
+--  Compare both characters and move both pointers inward if they match.
+--  If we find the first mismatch, we are allowed to delete one character.
+--  So I try both possibilities:
+--  Skip left → check left + 1 to right
+--  Skip right → check left to right - 1
+--  I use a helper isPalindrome() to check whether the remaining part is a palindrome.
+--  If either side works, return true.
+
+--  We don't actually delete anything from the string. We just move the pointer, so we don't need StringBuilder.
+
+## Complexity
+Time: O(n) — traverse the string and at most two extra palindrome checks.
+Space: O(1) — no extra string or data structure.
+
+Pattern: Two Pointers + One Allowed Deletion
+
+SOLUTION :
+class Solution {
+
+    public boolean isPalindrome(String s, int left, int right) {
+        while (left <= right) {
+            if (s.charAt(left) != s.charAt(right)) {
+                return false;
+            }
+            left++;
+            right--;
+        }
+        return true;
+    }
+
+    public boolean validPalindrome(String s) {
+        int left = 0;
+        int right = s.length() - 1;
+        while (left <= right) {
+            if (s.charAt(left) != s.charAt(right)) {
+                return isPalindrome(s, left + 1, right) || isPalindrome(s, left, right - 1);
+            }
+            left++;
+            right--;
+        }
+        return true;
+    }
+}
