@@ -1,0 +1,97 @@
+## 125-Valid palindrome
+
+## Approach 1: Two Pointers — Optimal
+# Idea
+We need to check whether a string is a palindrome after:
+Ignoring all non-alphanumeric characters.
+Treating uppercase and lowercase letters as the same.
+
+I use two pointers:
+--  left starts from the beginning.
+--  right starts from the end.
+--  If left points to a non-alphanumeric character, move left forward.
+--  If right points to a non-alphanumeric character, move right backward.
+--  When both characters are valid, convert them to lowercase and compare them.
+--  If they are different, return false.
+--  Otherwise, move both pointers inward.
+--  If the pointers finish without finding a mismatch, return true.
+
+## Complexity
+Time: O(n)
+Space: O(1)
+
+SOLUTION :
+class Solution {
+    public boolean isPalindrome(String s) {
+
+        int left = 0;
+        int right = s.length() - 1;
+
+        while (left <= right) {
+
+            if (Character.isLetterOrDigit(s.charAt(left)) &&
+                Character.isLetterOrDigit(s.charAt(right))) {
+
+                if (Character.toLowerCase(s.charAt(left)) !=
+                    Character.toLowerCase(s.charAt(right))) {
+
+                    return false;
+                }
+
+                left++;
+                right--;
+
+            } else if (!Character.isLetterOrDigit(s.charAt(left))) {
+
+                left++;
+
+            } else if (!Character.isLetterOrDigit(s.charAt(right))) {
+
+                right--;
+            }
+        }
+
+        return true;
+    }
+}
+
+-----------------------------------
+## Approach 2: Regex + StringBuilder
+# Idea
+Instead of skipping non-alphanumeric characters using two pointers, we can first clean the entire string.
+
+--  Remove all non-alphanumeric characters using replaceAll().
+--  Convert the string to lowercase.
+--  Reverse the cleaned string using StringBuilder.
+--  Compare the original cleaned string with the reversed string.
+
+For example:
+"A man, a plan, a canal: Panama"
+                ↓
+"amanaplanacanalpanama"
+                ↓ reverse
+"amanaplanacanalpanama"
+                ↓
+true
+
+## Complexity
+Time: O(n)
+Space: O(n)
+
+SOLUTION :
+class Solution {
+    public boolean isPalindrome(String s) {
+
+        // Remove all non-alphanumeric characters
+        s = s.replaceAll("[^a-zA-Z0-9]", "");
+
+        // Convert to lowercase
+        s = s.toLowerCase();
+
+        // Reverse the string
+        String rev = new StringBuilder(s).reverse().toString();
+
+        // Compare original and reversed strings
+        return s.equals(rev);
+    }
+}
