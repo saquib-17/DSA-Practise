@@ -1,0 +1,50 @@
+## 58. Length of Last Word
+
+# Approach — Traverse From Right
+--  Start from the last index of the string using s.length() - 1.
+--  First, check for any trailing spaces.
+--  If there are spaces, keep moving backward until we reach the last word.
+--  Once we reach a character, start counting the characters.
+--  Keep moving backward and increment count until we encounter a space.
+--  When a space is found, the last word has ended.
+--  Return count.
+
+## Example
+For:
+
+" fly me to the moon "
+
+Start from right
+        ↓
+"   fly me   to   the moon  "
+                          ↑
+                    skip spaces
+                          ↓
+"   fly me   to   the moon"
+                       ↑
+                  count backward
+                       ↓
+                    "moon"
+
+count = 4
+
+## Complexity
+Time: O(n)
+Space: O(1)
+Approach: Optimal
+
+SOLUTION : 
+class Solution {
+    public int lengthOfLastWord(String s) {
+        int i = s.length() - 1;
+        int count = 0;
+        while (s.charAt(i) == ' ') {
+            i--;
+        }
+        while (i >= 0 && s.charAt(i) != ' ') {
+            count++;
+            i--;
+        }
+        return count;
+    }
+}
