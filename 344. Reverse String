@@ -1,0 +1,25 @@
+## 344. Reverse String
+
+## Approach:
+--  I used two pointers, one starting from the beginning and the other from the end of the array. 
+--  I swapped the elements at both pointers and moved them towards the center until the string was reversed.
+
+## Complexity:
+Time: O(n)
+Space: O(1)
+
+SOLUTION : 
+class Solution {
+    public void reverseString(char[] s) {
+        int left = 0;
+        int right = s.length-1;
+        while (left < right) {
+            char temp = s[left];
+            s[left] = s[right];
+            s[right] = temp;
+
+            left++;
+            right--;
+        }
+    }
+}
