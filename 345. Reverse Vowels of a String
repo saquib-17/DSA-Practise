@@ -1,0 +1,44 @@
+## 345. Reverse Vowels of a String
+
+## Approach
+--  Convert the string into a char[] because Java Strings are immutable.
+--  Use two pointers: left at the beginning and right at the end.
+--  Move left until it finds a vowel.
+--  Move right until it finds a vowel.
+--  Swap the two vowels.
+--  Continue until the pointers meet.
+--  Return the modified character array as a String.
+
+Time: O(n)
+Space: O(n) - char array
+
+SOLUTION : 
+class Solution {
+    public String reverseVowels(String s) {
+        int left = 0;
+        int right = s.length() - 1;
+        char[] arr = s.toCharArray();
+        while (left < right) {
+            while (left < right && !isVowel(arr[left])) { // it checks until it founds vowel character
+                left++;
+            }
+            while (left < right && !isVowel(arr[right])) {
+                right--;
+            }
+
+            char temp = arr[left];
+            arr[left] = arr[right];
+            arr[right] = temp;
+
+            left++;
+            right--;
+        }
+        return new String(arr);
+    }
+
+    private boolean isVowel(char c) { // it returns boolean value, true if matches this condition otherwise it returns false 
+        return c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u' || c == 'A' || c == 'E' || c == 'I' || c == 'O'
+                || c == 'U';
+    }
+
+}
