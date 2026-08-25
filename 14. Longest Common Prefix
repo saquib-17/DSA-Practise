@@ -1,0 +1,39 @@
+## 14. Longest Common Prefix
+
+## Approach
+--  Take the first string as the reference string.
+--  Traverse each character of the reference string using index i.
+--  For every i, compare that character with the same index in every other string.
+--  If any string is shorter or the characters don't match, stop the comparison.
+--  If all strings match at that index, increase the prefixLength.
+--  Finally, return the first prefixLength characters from the reference string.
+
+## Complexity :
+Time: O(n × m)
+Space: O(1)
+
+where n = number of strings and m = length of the shortest string.
+
+SOLUTION :
+class Solution {
+    public String longestCommonPrefix(String[] strs) {
+        String reference = strs[0];
+        int prefixLength = 0;
+        boolean mismatch = false;
+        for (int i = 0; i < reference.length(); i++) {
+            for (int j = 0; j < strs.length; j++) {
+                if (i >= strs[j].length()) { // at any portion i is greater than the next string index i which means the first reference string ends
+                    mismatch = true;
+                    break;
+                } else if (reference.charAt(i) != strs[j].charAt(i)) {
+                    mismatch = true;
+                    break;
+                }
+            }
+            if (mismatch)
+                break;
+            prefixLength++;
+        }
+        return reference.substring(0, prefixLength); // it returns all character which matches in all strings from starting with the first string as a reference
+    }
+}
