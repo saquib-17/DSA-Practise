@@ -1,0 +1,26 @@
+## 3718. Smallest Missing Multiple of K
+
+## Approach
+Store all elements of nums in a HashSet.
+Start with the first multiple k.
+Keep checking whether the current multiple exists in the set.
+If it exists, move to the next multiple by adding k.
+Return the first multiple that is missing.
+
+Time: O(n) average
+Space: O(n)
+
+SOLUTION :
+class Solution {
+    public int missingMultiple(int[] nums, int k) {
+        HashSet<Integer> set = new HashSet<>();
+        for (int i : nums) {
+            set.add(i);
+        }
+        int res = k;
+        while (set.contains(res)) {
+            res += k;
+        }
+        return res;
+    }
+}
