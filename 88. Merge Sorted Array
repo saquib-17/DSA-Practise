@@ -1,0 +1,58 @@
+## 88. Merge Sorted Array
+
+## Approach
+Create a new array merge of size m + n.
+Use two pointers i and j for nums1 and nums2.
+Compare the elements of both arrays.
+Put the smaller element into merge.
+If both elements are equal, put both into merge.
+Move the pointer after taking an element.
+When one array is finished, copy the remaining elements from the other array.
+Finally, copy all elements from merge back into nums1.
+
+## Complexity
+Time: O(m + n)
+Space: O(m + n) because we create the merge array.
+
+SOLUTION : 
+class Solution {
+    public void merge(int[] nums1, int m, int[] nums2, int n) {
+        int[] merge = new int[n + m];
+        int index = 0;
+        int i = 0;
+        int j = 0;
+        while (i < m && j < n) {
+            if (nums1[i] < nums2[j]) {
+                merge[index] = nums1[i];
+                index++;
+                i++;
+            } else if (nums1[i] > nums2[j]) {
+                merge[index] = nums2[j];
+                index++;
+                j++;
+            } else {
+                merge[index++] = nums1[i];
+                merge[index++] = nums2[j];
+                i++;
+                j++;
+            }
+        }
+
+        while (i < m) {
+            merge[index] = nums1[i];
+            index++;
+            i++;
+        }
+
+        while (j < n) {
+            merge[index] = nums2[j];
+            index++;
+            j++;
+        }
+
+        for (int k = 0; k < (n + m); k++) {
+            nums1[k] = merge[k];
+        }
+
+    }
+}
