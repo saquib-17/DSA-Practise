@@ -1,0 +1,35 @@
+## 349. Intersection of Two Arrays
+
+## Approach - HashSet
+--  Store all elements of nums1 in a HashSet.
+--  Traverse nums2 and check whether each element exists in the set.
+--  If found, add it to the result array.
+--  Remove the element from the set after adding it — this prevents duplicates.
+--  Since result was initialized with nums2.length, use Arrays.copyOf(result, index) to return only the portion containing valid results.
+
+Note :
+Used Arrays.copyOf() to return a new array containing only the valid elements found, instead of the unused zero-filled portion of the original array.
+
+## Complexity
+Time: O(n + m) average
+Space: O(n) auxiliary space for the HashSet
+
+SOLUTION :
+class Solution {
+    public int[] intersection(int[] nums1, int[] nums2) {
+        HashSet<Integer> set = new HashSet<>();
+        int index = 0;
+        for (int i : nums1) {
+            set.add(i);
+        }
+        int[] result = new int[nums2.length];
+        for (int i : nums2) {
+            if (set.contains(i)) {
+                result[index] = i;
+                index++;
+                set.remove(i);
+            }
+        }
+        return Arrays.copyOf(result, index);
+    }
+}
