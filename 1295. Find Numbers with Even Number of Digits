@@ -1,0 +1,39 @@
+## 1295. Find Numbers with Even Number of Digits
+
+## Approach
+Traverse through every number in the array.
+Count the number of digits using repeated division by 10.
+If the digit count is even, increment the answer.
+Return the total count.
+Example
+
+For num = 1234:
+
+1234 → 123 → 12 → 1 → 0
+
+The number has 4 digits, so it has an even number of digits.
+
+Complexity
+Time: O(n × d) — where n is the number of elements and d is the maximum number of digits.
+Space: O(1)
+
+SOLUTION :
+class Solution {
+    public int findNumbers(int[] nums) {
+        int count = 0;
+        for (int num : nums) {
+            int digits = 0;
+
+            while (num > 0) {
+                num = num / 10;
+                digits++;
+            }
+
+            if (digits % 2 == 0) {
+                count++;
+            }
+
+        }
+        return count;
+    }
+}
