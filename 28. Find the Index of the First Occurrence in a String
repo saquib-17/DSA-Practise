@@ -1,0 +1,49 @@
+## 28 — Find the Index of the First Occurrence in a String
+
+## Approach — Brute Force String Matching
+
+### Idea
+We need to find the first position where `needle` appears completely inside `haystack`.
+Instead of using Java's built-in `indexOf()`, we check every possible starting position in `haystack`.
+For each `start` position:
+
+1. Set `i = start` to point to the current position in `haystack`.
+2. Set `j = 0` to start from the beginning of `needle`.
+3. Compare both characters while they match.
+4. If a mismatch occurs, stop checking that starting position and move to the next `start`.
+5. If `j` reaches the length of `needle`, the complete string has been found, so return `start`.
+6. If no match is found after checking all starting positions, return `-1`.
+
+### Complexity
+Time: O(h × n)
+Space: O(1)`
+
+Where:
+h = length of `haystack`
+n = length of `needle`
+
+SOLUTION : 
+class Solution {
+    public int strStr(String haystack, String needle) {
+
+        int h = haystack.length();
+        int n = needle.length();
+
+        for (int start = 0; start < h; start++) {
+
+            int i = start;
+            int j = 0;
+
+            while (i < h && j < n &&
+                   haystack.charAt(i) == needle.charAt(j)) {
+                i++;
+                j++;
+            }
+
+            if (j == n)
+                return start;
+        }
+
+        return -1;
+    }
+}
