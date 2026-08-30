@@ -1,0 +1,32 @@
+## 1295. Find Numbers with Even Number of Digits
+
+## Approach
+--  Initailize count = 0, to track how many digits is divisible by 2.
+--  Run a foreach loop to traverse array.
+--  extract the digits from num, as num = num / 10.
+--  If that digit is divisible by 2 then increment the count.
+--  After Traversal, Return the count
+
+## Time Complexity : O(n).
+Space Complexity : O(1).
+
+SOLUTION : 
+class Solution {
+    public int findNumbers(int[] nums) {
+        int count = 0;
+        for (int num : nums) {
+            int digits = 0;
+
+            while (num > 0) {
+                num = num / 10;
+                digits++;
+            }
+
+            if (digits % 2 == 0) {
+                count++;
+            }
+
+        }
+        return count;
+    }
+}
