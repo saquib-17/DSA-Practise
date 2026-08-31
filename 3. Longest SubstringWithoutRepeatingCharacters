@@ -1,0 +1,32 @@
+## 3. Longest Substring Without Repeating Characters
+
+## Approach - Sliding Window + HashSet
+--  Use two pointers: left and right.
+--  Store characters of the current window in a HashSet.
+--  Move right through the string.
+--  If the character already exists, move left and remove characters until the duplicate is gone.
+--  Add the current character to the set.
+--  Update maxLen with right - left + 1.
+--  Return maxLen.
+
+## Complexity :
+Time: O(n)
+Space: O(k), k is number of unique characters
+
+SOLUTION :
+class Solution {
+    public int lengthOfLongestSubstring(String s) {
+        int left = 0;
+        int maxLen = 0;
+        HashSet<Character> set = new HashSet<>();
+        for (int right = 0; right < s.length(); right++) {
+            while (set.contains(s.charAt(right))) {
+                set.remove(s.charAt(left));
+                left++;
+            }
+            set.add(s.charAt(right));
+            maxLen = Math.max(maxLen, right - left + 1);
+        }
+        return maxLen;
+    }
+}
