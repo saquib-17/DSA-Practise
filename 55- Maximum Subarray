@@ -2,12 +2,12 @@
 
 ### Approach — Kadane's Algorithm
 
---  Keep a `max` variable to store the current subarray sum.
---  Keep a `maxSub` variable to store the maximum sum found so far.
---  Add every element to `max`.
---  Update `maxSub` with the current `max`.
---  If `max` becomes negative, reset it to `0` because a negative sum will only reduce the sum of the future subarray.
---  Initialize `maxSub` with `Integer.MIN_VALUE` so that arrays containing only negative numbers are handled correctly.
+--  Keep a max variable to store the current subarray sum.
+--  Keep a maxSub variable to store the maximum sum found so far.
+--  Add every element to max.
+--  Update maxSub with the current max.
+--  If max becomes negative, reset it to 0 because a negative sum will only reduce the sum of the future subarray.
+--  Initialize maxSub with Integer.MIN_VALUE so that arrays containing only negative numbers are handled correctly.
 
 ## Complexity : 
 --  Time Complexity : O(n)
