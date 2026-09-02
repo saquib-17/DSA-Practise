@@ -1,0 +1,73 @@
+## 2149. Rearrange Array Elements by Sign
+
+### Approach - 1
+
+1. Traverse the array and separate positive and negative numbers into two arrays while maintaining their original order.
+2. Since the result must start with a positive number and alternate signs, place positive numbers at even indices and negative numbers at odd indices.
+3. Use separate pointers for the positive and negative arrays to fill the result.
+4. Return the rearranged array.
+
+Time Complexity : O(n)
+Space Complexity : O(n), Uses extra 2 arrays
+
+SOLUTION : 
+class Solution {
+    public int[] rearrangeArray(int[] nums) {
+        int[] pos = new int[nums.length / 2];
+        int[] neg = new int[nums.length / 2];
+        int posIndex = 0;
+        int negIndex = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] > 0) {
+                pos[posIndex++] = nums[i];
+            } else {
+                neg[negIndex++] = nums[i];
+            }
+        }
+        posIndex = 0;
+        negIndex = 0;
+        int[] res = new int[nums.length];
+        for (int i = 0; i < res.length; i++) {
+            if (i % 2 == 0) {
+                res[i] = pos[posIndex++];
+            } else {
+                res[i] = neg[negIndex++];
+            }
+        }
+        return res;
+    }
+}
+
+
+### Approach - 2 (Optimal)
+
+1. Create a result array of the same size as nums.
+2. Maintain two pointers:
+--  pos = 0 → next position for a positive number.
+--  neg = 1 → next position for a negative number.
+3. Traverse nums:
+--  If the number is positive, place it at pos and increase pos by 2.
+--  If the number is negative, place it at neg and increase neg by 2.
+4. Return the result array.
+
+Time Complexity : O(n)
+Space Complexity :  O(n)
+
+SOLUTION : 
+class Solution {
+    public int[] rearrangeArray(int[] nums) {
+        int posIndex = 0; // it goes Even range 0-2-4-6 
+        int negIndex = 1; // it goes Odd rage 1-3-5-7
+        int[] res = new int[nums.length];
+        for (int num : nums) {
+            if (num > 0) {
+                res[posIndex] = num;
+                posIndex += 2;
+            } else {
+                res[negIndex] = num;
+                negIndex += 2;
+            }
+        }
+        return res;
+    }
+}
