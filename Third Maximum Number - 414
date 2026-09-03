@@ -1,0 +1,43 @@
+## 414. Third Maximum Number
+
+### Approach
+
+--  Maintain 3 variables: `max`, `secMax`, and `thirdMax`.
+--  Traverse the array once and skip duplicate values.
+--  If the current number is greater than `max`, shift `max → secMax → thirdMax`.
+--  Else if it is greater than `secMax`, shift `secMax → thirdMax`.
+--  Else if it is greater than `thirdMax`, update `thirdMax`.
+--  If 3 distinct maximum values don't exist, return `max`.
+--  Use `long` variables so `Integer.MIN_VALUE` can safely be a placeholder.
+
+Time : `O(n)`
+Space : `O(1)`
+
+SOLUTION : 
+class Solution {
+    public int thirdMax(int[] nums) {
+        long max = Long.MIN_VALUE;
+        long secMax = Long.MIN_VALUE;
+        long thirdMax = Long.MIN_VALUE;
+        for (int num : nums) {
+            if (num == max || num == secMax || num == thirdMax) {
+                continue;
+            }
+            if (num > max) {
+                thirdMax = secMax;
+                secMax = max;
+                max = num;
+            } else if (num > secMax) {
+                thirdMax = secMax;
+                secMax = num;
+            } else if(num > thirdMax){
+                thirdMax = num;
+            }
+
+        }
+        if(thirdMax == Long.MIN_VALUE) {
+            return (int)max;
+        }
+        return (int)thirdMax;
+    }
+}
