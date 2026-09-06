@@ -1,0 +1,90 @@
+## 73 - Set Matrix Zeroes
+
+## Approach 1 — Brute Force
+--  m = number of rows → matrix.length
+--  n = number of columns → matrix[0].length
+--  Traverse the matrix using nested loops.
+--  When a 0 is found, mark all non-zero elements in its row and column as -1.
+--  We use -1 so that newly marked cells are not treated as original zeros.
+--  After the traversal, convert all -1 values to 0.
+
+Time: O(m × n × (m + n))
+Space: O(1)
+
+SOLUTION : 
+ static void setMatrixZero(int[][] matrix) {
+        int n = matrix[0].length;
+        int m = matrix.length;
+
+        // step 1 : convert all non 0 to -1 on the selected rows and cols
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (matrix[i][j] == 0) {
+                    // for columns
+                    for(int col = 0; col < n; col++) {
+                        if (matrix[i][col] != 0) {
+                            matrix[i][col] = -1;
+                        }
+                    }
+
+                    // for rows
+                    for (int row = 0; row < m; row++) {
+                        if (matrix[row][j] != 0) {
+                            matrix[row][j] = -1;
+                        }
+                    }
+
+                }
+            }
+        }
+
+        // Steps 2 : covert -1 to 0
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (matrix[i][j] == -1) {
+                    matrix[i][j] = 0;
+                }
+            }
+  }
+
+
+## Approach 2 — Boolean Arrays
+--  Create two boolean arrays:
+--  rowMark[m] → tracks which rows contain an original 0
+--  colsMark[n] → tracks which columns contain an original 0
+--  First traversal:
+--  If matrix[i][j] == 0, mark rowMark[i] and colsMark[j] as true.
+--  Second traversal:
+--  If rowMark[i] || colsMark[j] is true, set matrix[i][j] = 0.
+
+Time: O(m × n)
+Space: O(m + n)
+
+SOLUTION : 
+class Solution {
+    public void setZeroes(int[][] matrix) {
+        int rows = matrix.length;
+        int cols = matrix[0].length;
+        boolean[] rowMark = new boolean[rows];
+        boolean[] colsMark = new boolean[cols];
+
+        // First marks all cols and rows to true which has 0
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                if (matrix[i][j] == 0) {
+                    rowMark[i] = true;
+                    colsMark[j] = true;
+                }
+            }
+        }
+
+        // convert all cols and rows to 0 which has true value
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                if (rowMark[i] || colsMark[j]) {
+                    matrix[i][j] = 0;
+                }
+            }
+        }
+    }
+}
